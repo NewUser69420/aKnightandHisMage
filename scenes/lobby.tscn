@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dewfpu4mu30me"]
+
+[ext_resource type="Script" uid="uid://wl7y7vd7f70q" path="res://scripts/lobby.gd" id="1_o1atq"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_so6iy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_so6iy"]
+
+[node name="Lobby" type="Node3D"]
+script = ExtResource("1_o1atq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.898258, 0.297867, -0.323123, 0, 0.735258, 0.677788, 0.439469, -0.608828, 0.660451, 0, 7.57376, 0)
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.2, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("BoxMesh_so6iy")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_so6iy")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://qxp03qetw86g")
+spawn_path = NodePath("../Players")
+spawn_limit = 2
+
+[node name="Players" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.638605, 0)

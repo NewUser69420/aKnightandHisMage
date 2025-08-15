@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfcdcvo8p0jyx"]
+
+[ext_resource type="Script" uid="uid://b7fyycfd2ylpo" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6cm7")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(0.552941, 0.235294, 0.858824, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AddressInput" type="LineEdit" parent="Panel"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -146.0
+offset_top = 177.0
+offset_right = 154.0
+offset_bottom = 247.0
+grow_horizontal = 2
+pivot_offset = Vector2(100, 0)
+placeholder_text = "address:"
+alignment = 1
+
+[node name="PortInput" type="LineEdit" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -190.0
+offset_right = 100.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "port:"
+alignment = 1
+
+[node name="JoinButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = -89.0
+offset_right = 184.0
+offset_bottom = -13.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Join"
+
+[node name="HostButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -91.0
+offset_right = -62.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Host"
+
+[connection signal="text_changed" from="Panel/PortInput" to="." method="set_port"]
+[connection signal="pressed" from="Panel/JoinButton" to="." method="start_client"]
+[connection signal="pressed" from="Panel/HostButton" to="." method="start_host"]
