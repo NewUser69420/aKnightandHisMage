@@ -1,27 +1,60 @@
-[gd_scene load_steps=4 format=3 uid="uid://dewfpu4mu30me"]
+[gd_scene load_steps=8 format=3 uid="uid://dewfpu4mu30me"]
 
 [ext_resource type="Script" uid="uid://wl7y7vd7f70q" path="res://scripts/lobby.gd" id="1_o1atq"]
+[ext_resource type="Material" uid="uid://b37h1kbifsjsp" path="res://assets/materials/grass_material_3d.tres" id="2_5gu6x"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_so6iy"]
+[sub_resource type="Environment" id="Environment_5gu6x"]
+background_color = Color(0.312361, 0.615498, 0.429373, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.026
+adjustment_enabled = true
+adjustment_contrast = 1.05
+adjustment_saturation = 1.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_o1atq"]
+material = ExtResource("2_5gu6x")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_so6iy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q60fs"]
+material = ExtResource("2_5gu6x")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5gu6x"]
 
 [node name="Lobby" type="Node3D"]
 script = ExtResource("1_o1atq")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Enviroment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Enviroment"]
+environment = SubResource("Environment_5gu6x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Enviroment"]
 transform = Transform3D(0.898258, 0.297867, -0.323123, 0, 0.735258, 0.677788, 0.439469, -0.608828, 0.660451, 0, 7.57376, 0)
+light_color = Color(0.973062, 0.961176, 0.918487, 1)
 shadow_enabled = true
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="Enviroment"]
 transform = Transform3D(10, 0, 0, 0, 0.2, 0, 0, 0, 10, 0, 0, 0)
-mesh = SubResource("BoxMesh_so6iy")
+mesh = SubResource("BoxMesh_o1atq")
 skeleton = NodePath("StaticBody3D/CollisionShape3D")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Enviroment/Floor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Floor/StaticBody3D"]
 shape = SubResource("BoxShape3D_so6iy")
+debug_fill = false
+
+[node name="Mound" type="MeshInstance3D" parent="Enviroment"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, -9.23891, 0.560404, 0)
+mesh = SubResource("BoxMesh_q60fs")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Enviroment/Mound"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enviroment/Mound/StaticBody3D"]
+shape = SubResource("BoxShape3D_5gu6x")
+debug_fill = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://qxp03qetw86g")

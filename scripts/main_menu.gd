@@ -1,7 +1,11 @@
 extends Control
 
-const DEFAULT_SERVER_IP: String = "127.0.0.1" # IPv4 localhost
+var ip: String = "127.0.0.1" # IPv4 localhost
 var port: int = 7000
+
+func set_ip(n_ip: String):
+	if n_ip != "":
+		ip = n_ip
 
 func set_port(n_port: String):
 	port = int(n_port)
@@ -12,4 +16,8 @@ func start_host():
 
 func start_client():
 	print("Pressed client")
-	MultiplayerManager.start_client(DEFAULT_SERVER_IP, port)
+	MultiplayerManager.start_client(ip, port)
+
+func _unhandled_input(event: InputEvent):
+	if Input.is_action_just_pressed("esc"):
+			get_tree().quit()

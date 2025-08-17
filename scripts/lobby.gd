@@ -9,3 +9,10 @@ func _ready():
 	var character: CharacterBody3D = player.instantiate()
 	character.position.x = -2.5
 	$Players.add_child(character, true)
+
+func _unhandled_input(event: InputEvent):
+	if Input.is_action_just_pressed("esc"):
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

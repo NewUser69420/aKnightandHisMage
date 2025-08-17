@@ -21,15 +21,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AddressInput" type="LineEdit" parent="Panel"]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -146.0
-offset_top = 177.0
-offset_right = 154.0
-offset_bottom = 247.0
+offset_left = -151.0
+offset_top = 256.0
+offset_right = 149.0
+offset_bottom = 326.0
 grow_horizontal = 2
 pivot_offset = Vector2(100, 0)
 placeholder_text = "address:"
@@ -81,6 +80,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Host"
 
+[connection signal="text_changed" from="Panel/AddressInput" to="." method="set_ip"]
 [connection signal="text_changed" from="Panel/PortInput" to="." method="set_port"]
 [connection signal="pressed" from="Panel/JoinButton" to="." method="start_client"]
 [connection signal="pressed" from="Panel/HostButton" to="." method="start_host"]
