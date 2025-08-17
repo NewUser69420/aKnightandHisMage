@@ -27,7 +27,7 @@ func _unhandled_input(event: InputEvent):
 		camera.rotate_x(-event.relative.y * 0.0025)
 		camera.rotation.x = clamp(camera.rotation.x, -PI/2, PI/2)
 
-func _process(delta: float):
+func _process(_delta: float):
 	rotate_y(input.input_rot)
 	input.input_rot = 0.0
 

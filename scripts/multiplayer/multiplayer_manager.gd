@@ -6,6 +6,7 @@ var lobby_scene = "res://scenes/lobby.tscn"
 var player = preload("res://scenes/player.tscn")
 
 var _players: Node3D
+var _room_generator: Node3D
 
 func start_host(port: int):
 	print("Starting host on port %s ..." % port)
@@ -40,11 +41,19 @@ func _add_player_to_game(id: int):
 	if _players == null:
 		_players = get_tree().get_current_scene().get_node("Players")
 	
+	if _room_generator == null:
+		_room_generator = get_tree().get_current_scene().get_node("Enviroment")
+	
 	var character: CharacterBody3D = player.instantiate()
 	character.player_id = id
 	character.position.x = 2.5
 	
 	_players.add_child(character, true)
+	
+	var serialized_list: Array = []
+	for room in _room_generator.room_list:
+		serialized_list.push_back([room.min, room.max])
+	load_map.rpc_id(id, serialized_list)
 
 func _del_player(id: int):
 	print("Player %s left the game!" % id )
@@ -56,6 +65,15 @@ func _del_player(id: int):
 		if character.player_id == id:
 			character.queue_free()
 			break
+
+@rpc("call_remote", "reliable")
+func load_map(vec_list: Array):
+	var room_list: Array[Aabb] = []
+	for pair in vec_list:
+		room_list.push_back(Aabb.new(pair[0], pair[1]))
+	
+	var room_generator = get_tree().get_current_scene().get_node("Enviroment")
+	room_generator.spawn_rooms(room_list)
 
 func _exit_tree():
 	if not multiplayer.is_server():

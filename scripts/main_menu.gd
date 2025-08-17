@@ -1,7 +1,7 @@
 extends Control
 
 var ip: String = "127.0.0.1" # IPv4 localhost
-var port: int = 7000
+var port: int = 7777
 
 func set_ip(n_ip: String):
 	if n_ip != "":
@@ -18,6 +18,6 @@ func start_client():
 	print("Pressed client")
 	MultiplayerManager.start_client(ip, port)
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(_event: InputEvent):
 	if Input.is_action_just_pressed("esc"):
 			get_tree().quit()

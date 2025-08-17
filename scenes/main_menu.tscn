@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfcdcvo8p0jyx"]
+[gd_scene load_steps=3 format=3 uid="uid://bfcdcvo8p0jyx"]
 
 [ext_resource type="Script" uid="uid://b7fyycfd2ylpo" path="res://scripts/main_menu.gd" id="1_l6cm7"]
+[ext_resource type="Texture2D" uid="uid://cc3tkp5ahwkgd" path="res://assets/dump/just_a_little_guy.png" id="2_ekxnf"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -20,67 +21,90 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AddressInput" type="LineEdit" parent="Panel"]
+[node name="AddressInput" type="LineEdit" parent="."]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -151.0
-offset_top = 256.0
-offset_right = 149.0
-offset_bottom = 326.0
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -219.0
+offset_right = 159.0
+offset_bottom = -133.0
 grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.880001, 0.880001)
 pivot_offset = Vector2(100, 0)
 placeholder_text = "address:"
 alignment = 1
 
-[node name="PortInput" type="LineEdit" parent="Panel"]
+[node name="PortInput" type="LineEdit" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -190.0
-offset_right = 100.0
-offset_bottom = -120.0
+offset_left = -87.9999
+offset_top = -122.0
+offset_right = 112.0
+offset_bottom = -52.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.92, 0.92)
 placeholder_text = "port:"
 alignment = 1
 
-[node name="JoinButton" type="Button" parent="Panel"]
+[node name="JoinButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 59.0
-offset_top = -89.0
-offset_right = 184.0
-offset_bottom = -13.0
+offset_left = 62.0001
+offset_top = -36.0
+offset_right = 187.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.92, 0.92)
 text = "Join"
 
-[node name="HostButton" type="Button" parent="Panel"]
+[node name="HostButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -187.0
-offset_top = -91.0
-offset_right = -62.0
-offset_bottom = -15.0
+offset_left = -166.0
+offset_top = -37.0
+offset_right = -40.9999
+offset_bottom = 39.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.92, 0.92)
 text = "Host"
 
-[connection signal="text_changed" from="Panel/AddressInput" to="." method="set_ip"]
-[connection signal="text_changed" from="Panel/PortInput" to="." method="set_port"]
-[connection signal="pressed" from="Panel/JoinButton" to="." method="start_client"]
-[connection signal="pressed" from="Panel/HostButton" to="." method="start_host"]
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -488.0
+offset_top = -211.0
+offset_right = -248.0
+offset_bottom = 29.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("2_ekxnf")
+
+[connection signal="text_changed" from="AddressInput" to="." method="set_ip"]
+[connection signal="text_changed" from="PortInput" to="." method="set_port"]
+[connection signal="pressed" from="JoinButton" to="." method="start_client"]
+[connection signal="pressed" from="HostButton" to="." method="start_host"]
