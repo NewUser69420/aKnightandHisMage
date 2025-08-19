@@ -1,6 +1,6 @@
 extends Node
 
-const ROOM_NUM: int = 10
+const ROOM_NUM: int = 0
 const DISP_SPEED: float = 5.0
 
 var room_list: Array[Aabb]
@@ -12,6 +12,9 @@ func _ready():
 		generate_rooms()
 
 func generate_rooms():
+	if ROOM_NUM <= 0:
+		return
+	
 	room_list = []
 	room_list.resize(ROOM_NUM)
 	

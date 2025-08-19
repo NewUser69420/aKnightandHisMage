@@ -61,6 +61,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67708, -0.214391)
 
 [node name="Camera3D" type="Camera3D" parent="CamMount"]
 
+[node name="SpotLight3D" type="SpotLight3D" parent="CamMount/Camera3D"]
+light_specular = 1.0
+shadow_enabled = true
+distance_fade_begin = 1.0
+spot_range = 3.0
+spot_angle = 48.0
+spot_angle_attenuation = 4.59479
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01203, 0)
 shape = SubResource("CapsuleShape3D_5q5h1")

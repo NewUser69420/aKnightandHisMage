@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://wl7y7vd7f70q" path="res://scripts/lobby.gd" id="1_o1atq"]
 [ext_resource type="Material" uid="uid://b37h1kbifsjsp" path="res://assets/materials/grass_material_3d.tres" id="2_5gu6x"]
 [ext_resource type="Script" uid="uid://y7ps8h1p3gr6" path="res://scripts/enviroment/room_generator.gd" id="2_nqcc7"]
-[ext_resource type="MeshLibrary" uid="uid://t3dkqa1mhu15" path="res://mesh_libs/mesh_lib_test.tres" id="3_q60fs"]
+[ext_resource type="MeshLibrary" uid="uid://cn8t15jni3vfl" path="res://mesh_libs/dungeon_tileset.tres" id="4_nqcc7"]
 
 [sub_resource type="Environment" id="Environment_5gu6x"]
-background_color = Color(0.312361, 0.615498, 0.429373, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.598956, 0.602053, 0.556342, 1)
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.026
 adjustment_enabled = true
@@ -45,9 +46,12 @@ shape = SubResource("BoxShape3D_so6iy")
 debug_fill = false
 
 [node name="GridMap" type="GridMap" parent="Enviroment"]
-mesh_library = ExtResource("3_q60fs")
+mesh_library = ExtResource("4_nqcc7")
 cell_size = Vector3(2, 1, 2)
 cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 4, 1048576, 0, 5, 1048576, 0, 6, 1048576, 1, 4, 1048577, 1, 5, 1048577, 1, 6, 1048577, 2, 5, 1048578, 2, 8, 2, 2, 6, 1, 2, 7, 1, 1, 7, 655364, 0, 7, 655363, 1, 8, 1048576, 3, 8, 1441792, 3, 7, 1441792, 3, 6, 1441792, 3, 5, 1441792, 3, 4, 1441792, 2, 4, 1441793, 2, 9, 1441793, 3, 9, 1441792, 2, 10, 655360, 1, 9, 1048576, 3, 10, 1441795, 1, 10, 655363)
+}
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
