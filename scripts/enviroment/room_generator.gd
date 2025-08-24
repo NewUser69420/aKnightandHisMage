@@ -1,9 +1,9 @@
 extends Node
 
-const ROOM_NUM: int = 0
+const ROOM_NUM: int = 5
 const DISP_SPEED: float = 5.0
 
-var room_list: Array[Aabb]
+var room_list: Array[Room]
 
 @onready var grid_map: GridMap = $GridMap
 
@@ -30,7 +30,8 @@ func generate_rooms():
 		
 		var amin = Vector2(rp.x, rp.y)
 		var amax = amin + size
-		var aabb = Aabb.new(amin, amax)
+		var kind = Room.RoomKind.Empty
+		var aabb = Room.new(amin, amax, kind)
 		room_list[i] = aabb
 	
 	disperse_rooms()
@@ -75,13 +76,13 @@ func disperse_rooms():
 					var dir = (room2.min - room.min).normalized()
 					intersections.push_back(Intersection.new(idd, dir))
 
-func aabb_coll(a: Aabb, b: Aabb) -> bool:
+func aabb_coll(a: Room, b: Room) -> bool:
 	return (a.min.x <= b.max.x
 		&& a.max.x >= b.min.x
 		&& a.min.y <= b.max.y
 		&& a.max.y >= b.min.y)
 
-func spawn_rooms(rm_list: Array[Aabb]):
+func spawn_rooms(rm_list: Array[Room]):
 	for room in rm_list:
 		var width: int = int(room.max.x - room.min.x)
 		var height: int = int(room.max.y - room.min.y)
@@ -90,4 +91,13 @@ func spawn_rooms(rm_list: Array[Aabb]):
 				var x_pos: int = int(room.min.x + x)
 				var y_pos: int = int(room.min.y + y)
 				var pos = Vector3i(x_pos, 0, y_pos)
-				grid_map.set_cell_item(pos, 0)
+				var id = 1
+				if on_edge(width, height, Vector2(x, y)):
+					id = 0
+				grid_map.set_cell_item(pos, id)
+
+func on_edge(w: int, h: int, pos: Vector2) -> bool:
+	var x: bool = (pos.x == 0 || pos.x == w || pos.x == h)
+	var y: bool = (pos.y == 0 || pos.y == w || pos.y == h)
+	
+	return (x || y)

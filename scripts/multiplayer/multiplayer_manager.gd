@@ -68,9 +68,9 @@ func _del_player(id: int):
 
 @rpc("call_remote", "reliable")
 func load_map(vec_list: Array):
-	var room_list: Array[Aabb] = []
+	var room_list: Array[Room] = []
 	for pair in vec_list:
-		room_list.push_back(Aabb.new(pair[0], pair[1]))
+		room_list.push_back(Room.new(pair[0], pair[1], Room.RoomKind.Empty))
 	
 	var room_generator = get_tree().get_current_scene().get_node("Enviroment")
 	room_generator.spawn_rooms(room_list)
